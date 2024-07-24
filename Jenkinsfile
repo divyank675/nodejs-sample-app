@@ -1,53 +1,31 @@
+
 pipeline {
-agent { dockerfile true }
-
-   stages {
-
-    stage('Cloning Git') {
-	    steps{
-	      sh 'echo checking out source code'
-	    }  
-     }  
- 
-    stage('SAST'){
-      steps{
-      	sh 'echo SAST stage'
-	   }
+agent any
+stages {
+stage('Build') {
+    steps {
+    // One or more steps need to be included within the steps block.
+    sh "docker build .  -t divyankchauhan/next-js-app:$BUILD_NUMBER"
     }
+}
 
-    
-    stage('Build-and-Tag') {
-    /* This builds the actual image; synonymous to
-         * docker build on the command line */
-      steps{	
-        sh 'echo Build and Tag'
-          }
+
+
+stage('LOGIN') {
+    steps {
+    // One or more steps need to be included within the steps block.
+     withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
+     sh "docker -H tcp://172.17.0.1:4200 login -u divyankchauhan -p $DOCKER_PASSWORD"
+}
+}
+}
+
+
+stage('PUSH') {
+    steps {
+    // One or more steps need to be included within the steps block.
+    sh "docker push divyankchauhan/next-js-app:$BUILD_NUMBER"
     }
-
-    stage('Post-to-dockerhub') {
-     steps {
-        sh 'echo post to dockerhub repo'
-     }
-    }
-
-    stage('SECURITY-IMAGE-SCANNER'){
-      steps {
-        sh 'echo scan image for security'
-     }
-    }
-
-    stage('Pull-image-server') {
-      steps {
-         sh 'echo pulling image ...'
-       }
-      }
-    
-    stage('DAST') {
-      steps  {
-         sh 'echo dast scan for security'
-        }
-    }
- }
-
-
+   }
+  }
 }
