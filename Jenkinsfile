@@ -30,13 +30,7 @@ stage('PUSH') {
 
 stage('IMage Tag update in manifest') {
     steps {
-    script {
-    // some block
-    #!/bin/bash
-    test=$( cat ./manifest/deployment.yaml | grep image )
-    t=${test:0:59}
-    sed -i "s+$test+$t$BUILD_NUMBER+g" ./manifest/deployment.yaml
-    }
+    bash ' test=$( cat ./manifest/deployment.yaml | grep image )|    t=${test:0:59} | s -i "s+$test+$t$BUILD_NUMBER+g" ./manifest/deployment.yaml'
     }
    }
 stage("deploying manifest"){
