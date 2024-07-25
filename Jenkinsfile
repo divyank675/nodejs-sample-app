@@ -32,9 +32,9 @@ stage('IMage Tag update in manifest') {
     steps {
     script {
     // some block
-    test=$( cat manifest/deployment.yaml| grep image )
+    test=$( cat ./manifest/deployment.yaml | grep image )
     t=${test:0:59}
-    sed -i "s+$test+$t$BUILD_NUMBER+g" manifest/deployment.yaml
+    sed -i "s+$test+$t$BUILD_NUMBER+g" ./manifest/deployment.yaml
     }
     }
    }
