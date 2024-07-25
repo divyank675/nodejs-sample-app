@@ -1,7 +1,32 @@
-
+stage('Run CI?') {
+      agent any
+      steps {
+        script {
+          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
+            currentBuild.result = 'NOT_BUILT'
+            error 'Aborting because commit message contains [skip ci]'
+          }
+        }
+      }
+    }
 pipeline {
 agent any
 stages {
+
+
+stage('Run CI?') {
+      agent any
+      steps {
+        script {
+          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
+            currentBuild.result = 'NOT_BUILT'
+            error 'Aborting because commit message contains [skip ci]'
+          }
+        }
+      }
+    }
+
+
 stage('Build') {
     steps {
     // One or more steps need to be included within the steps block.
@@ -28,7 +53,17 @@ stage('PUSH') {
     }
    }
 
-stage('IMage Tag update in manifest') {
+stage('IMage Tag update in mastage('Run CI?') {
+      agent any
+      steps {
+        script {
+          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
+            currentBuild.result = 'NOT_BUILT'
+            error 'Aborting because commit message contains [skip ci]'
+          }
+        }
+      }
+    }nifest') {
     steps {
       sh '''#!/bin/bash
             test=$( cat manifest/deployment.yaml| grep image );    t=${test:0:59} ;    sed -i "s+$test+$t$BUILD_NUMBER'+g" manifest/deployment.yaml
@@ -40,7 +75,7 @@ stage('git tag and push') {
     steps {
       sh '''#!/bin/bash
              git add manifest/deployment.yaml
-             git commit -m " New release Version $BUILD_NUMBER" 
+             git commit -m "[skip ci]  $BUILD_NUMBER" 
              git tag   $BUILD_NUMBER -m "Version $BUILD_NUMBER"
              git push origin HEAD:main
              git push --tags 
