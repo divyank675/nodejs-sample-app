@@ -42,7 +42,7 @@ stage('git tag and push') {
              git add manifest/deployment.yaml
              git commit -m " New release Version $BUILD_NUMBER" 
              git tag -a $BUILD_NUMBER
-             git push origin HEAD:$GIT_BRANCH
+             git push origin HEAD:main
          '''
     }
    }
