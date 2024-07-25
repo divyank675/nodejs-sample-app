@@ -30,7 +30,7 @@ stage('PUSH') {
 
 stage('IMage Tag update in manifest') {
     steps {
-       sh "sed -i "s+tag+$BUILD_NUMBER+g" manifest/deployment.yaml"
+       sh 'sed -i "s+tag+$BUILD_NUMBER+g" manifest/deployment.yaml'
 
     }
    }
