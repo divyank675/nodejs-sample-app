@@ -35,6 +35,20 @@ stage('IMage Tag update in manifest') {
          '''
     }
    }
+
+stage('IMage Tag update in manifest') {
+    steps {
+      sh '''#!/bin/bash
+             git add manifest/deployment.yaml
+             git commit -m " New release Version $BUILD_NUMBER" 
+             git tag -a $BUILD_NUMBER
+             git push
+         '''
+    }
+   }
+
+
+
 stage("deploying manifest"){
     steps {
     // One or more steps need to be included within the steps block.
