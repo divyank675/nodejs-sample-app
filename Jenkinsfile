@@ -32,8 +32,8 @@ stage('IMage Tag update in manifest') {
     steps {
 script {
     // some block
-   sh "test=$(cat deployment.yaml | grep image | awk -F: '{ print $3 }')"
-   sh 'sed -i "s+$test+$BUILD_NUMBER+g" manifest/deployment.yaml'
+    test=$(cat deployment.yaml | grep image | awk -F: '{ print $3 }')
+    sed -i "s+$test+$BUILD_NUMBER+g" manifest/deployment.yaml
 
 }
        sh "test=$(cat deployment.yaml | grep image | awk -F: '{ print $3 }')"
