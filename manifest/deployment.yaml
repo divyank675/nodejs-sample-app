@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodejs-sample-app
+  name: nodejs-sample-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-sample-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-sample-app
+    spec:
+      containers:
+      - image: 'docker.io/divyankchauhan/nodejs-sample-app:120'
+        name: nodejs-sample-app
+status: {}

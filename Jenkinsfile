@@ -5,7 +5,7 @@ stages {
 stage('Build') {
     steps {
     // One or more steps need to be included within the steps block.
-    sh "docker build .  -t divyankchauhan/next-js-app:$BUILD_NUMBER"
+    sh "docker build .  -t divyankchauhan/nodejs-sample-app:$BUILD_NUMBER"
     }
 }
 
@@ -24,7 +24,7 @@ stage('LOGIN') {
 stage('PUSH') {
     steps {
     // One or more steps need to be included within the steps block.
-    sh "docker push divyankchauhan/next-js-app:$BUILD_NUMBER"
+    sh "docker push divyankchauhan/nodejs-sample-app:$BUILD_NUMBER"
     }
    }
   }
