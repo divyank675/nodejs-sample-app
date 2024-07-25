@@ -15,6 +15,6 @@ spec:
         app: nodejs-sample-app
     spec:
       containers:
-      - image: 'docker.io/divyankchauhan/nodejs-sample-app:130130
+      - image: 'docker.io/divyankchauhan/nodejs-sample-app:124'
         name: nodejs-sample-app
 status: {}
