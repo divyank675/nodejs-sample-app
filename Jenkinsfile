@@ -16,18 +16,6 @@ stage('Run CI?') {
     }
 
 
-stage('Run CI?') {
-      agent any
-      steps {
-        script {
-          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
-            currentBuild.result = 'NOT_BUILT'
-            error 'Aborting because commit message contains [skip ci]'
-          }
-        }
-      }
-    }
-
 
 stage('Build') {
     steps {
@@ -55,17 +43,7 @@ stage('PUSH') {
     }
    }
 
-stage('IMage Tag update in mastage('Run CI?') {
-      agent any
-      steps {
-        script {
-          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
-            currentBuild.result = 'NOT_BUILT'
-            error 'Aborting because commit message contains [skip ci]'
-          }
-        }
-      }
-    }nifest') {
+stage('IMage Tag update in manifest') {
     steps {
       sh '''#!/bin/bash
             test=$( cat manifest/deployment.yaml| grep image );    t=${test:0:59} ;    sed -i "s+$test+$t$BUILD_NUMBER'+g" manifest/deployment.yaml
