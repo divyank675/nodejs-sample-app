@@ -1,3 +1,8 @@
+
+pipeline {
+agent any
+stages {
+
 stage('Run CI?') {
       agent any
       steps {
@@ -9,9 +14,6 @@ stage('Run CI?') {
         }
       }
     }
-pipeline {
-agent any
-stages {
 
 
 stage('Run CI?') {
