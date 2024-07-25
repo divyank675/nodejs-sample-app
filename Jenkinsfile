@@ -36,7 +36,7 @@ stage('IMage Tag update in manifest') {
     }
    }
 
-stage('IMage Tag update in manifest') {
+stage('git tag and push') {
     steps {
       sh '''#!/bin/bash
              git add manifest/deployment.yaml
